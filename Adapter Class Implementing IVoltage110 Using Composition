@@ -1,0 +1,17 @@
+// Adapter class implementing IVoltage110 by using composition with IVoltage220
+public class VoltageAdapter : IVoltage110
+{
+    private readonly IVoltage220 _device220;
+
+    public VoltageAdapter(IVoltage220 device220)
+    {
+        _device220 = device220;
+    }
+
+    public int GetVoltage110()
+    {
+        int voltage220 = _device220.GetVoltage220();
+        // Convert 220 volts to 110 volts
+        return voltage220 / 2;
+    }
+}
